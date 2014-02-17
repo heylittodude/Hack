@@ -3,12 +3,12 @@ $(document).ready(function() {
 	var map;
 	function initialize() {
 		geocoder = new google.maps.Geocoder();
-		var latlng = new google.maps.LatLng(37.774929, -122.419416)
+		var latlng = new google.maps.LatLng(37.774929, -122.419416);
 		var mapOptions = {
 			zoom: 8,
 			center: latlng
 		}
-		map = new google.maps.Map(document.getElementById("map"), mapOptions)
+		map = new google.maps.Map(document.getElementById("map"), mapOptions);
 	}
 
 	function locateAddress() {
