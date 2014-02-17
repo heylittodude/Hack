@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" type="text/css" href="main.css">
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery.ui.all.css" type="text/css" media="all" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsA3XrqC-kWMWN3BFssXpCosfoz___IXw&sensor=false">
+    	</script>
+		<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+  		<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<script type="text/javascript" src="application.js"></script>
+		<meta charset="utf-8">
+		<title>QuizApp</title>
+	</head>
+	<body onload="initialize()">
+		<div id="map"></div>
+		<div>
+			<input id="address" type="textbox" value="San Francisco, CA">
+			<input type="button" value="Lookup" onclick="locateAddress()">
+		</div>
+	</body>
