@@ -3,7 +3,7 @@ $(document).ready(function() {
 	var map;
 	function initialize() {
 		geocoder = new google.maps.Geocoder();
-		var latlng = new google.maps.LatLng(37.774929, -122.419416);
+		var latlng = new google.maps.LatLng(37.775, -122.419);
 		var mapOptions = {
 			zoom: 8,
 			center: latlng
@@ -12,8 +12,23 @@ $(document).ready(function() {
 	}
 
 	function locateAddress() {
+  		var address = document.getElementById('address').value;
+  		geocoder.geocode( { 'address': address}, function(results, status) {
+    		if (status == google.maps.GeocoderStatus.OK) {
+      			map.setCenter(results[0].geometry.location);
+      			var marker = new google.maps.Marker({
+          			map: map,
+          			position: results[0].geometry.location
+      			});
+    		} else {
+      			alert('Geocode was not successful for the following reason: ' + status);
+    		}
+  		});
+	}
+
+	/*function locateAddress() {
 		var address = document.getElementById('address').value;
-		geocoder.geocode( {'address': address}, function(result. status) {
+		geocoder.geocode( { 'address': address}, function(results, status) {
 			if (status == google.maps.GeocoderStatus.OK) {
 				map.setCenter(results[0].geometry.location);
 				var marker = new google.maps.Marker({
@@ -24,5 +39,6 @@ $(document).ready(function() {
 				alert("Look up not successful, error reason: " + status);
 			}
 		});
-	}
+	}*/
+	google.maps.event.addDomListener(window, 'load', initialize);
 });
