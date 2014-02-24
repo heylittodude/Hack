@@ -47,7 +47,16 @@ table {
 	border-spacing: 0;
 }
 /*My CSS*/
+body {
+	width: 1000px;
+}
 #map {
 	width: 400px;
 	height: 450px;
+	display: inline-block;
+}
+#directions-panel {
+	width: 400px;
+	height: 100px;
+	display: inline-block;
 }

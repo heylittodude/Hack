@@ -10,14 +10,20 @@
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 		<meta charset="utf-8">
 		<script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsA3XrqC-kWMWN3BFssXpCosfoz___IXw&sensor=false">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsA3XrqC-kWMWN3BFssXpCosfoz___IXw&sensor=false&libraries=places">
     	</script>
 		<title>Hack!</title>
 	</head>
 	<body>
 		<div id="map"></div>
+		<div id="directions-panel"></div>
 		<div>
 			<input id="address" type="textbox" value="San Francisco, CA">
-			<input id="lookup" type="button" value="Lookup">
+			<input id="destination" type="textbox">
+			<input id="lookup" type="button" value="Lookup"><br>
+			<input id="event" type="textbox" value="restaurant">
+			<input id="find" type="button" value="Find"><br>
+			<input id="direction" type="button" value="Drive"><br>
+			<input id="deleteMarkers" type="button" value="Clear Markers">
 		</div>
 	</body>
