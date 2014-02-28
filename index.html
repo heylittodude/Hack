@@ -21,10 +21,11 @@
 				<div id="instruction">
 					<h1>Instructions:</h1>
 					<ul>
-						<li><p>Type in the address of interest and click "Lookup" to set the originating point.</p></li>
-						<li><p>Put in the search term, ie: music, park etc and hit "Find" to locate matched establishments in the vicinity.</p></li>
+						<li><p>Type in the address of interest and click 'Locate' to set the originating point.</p></li>
+						<li><p>Input search term such as 'theater, park, etc' and hit 'Find' to locate matched establishments in the vicinity.</p></li>
 						<li><p>Click on the red markers on the map for a popup with some infomation of the selected locale.</p></li>
-						<li><p>While the popup is open, click the "Direction" button for driving directions from the point of origination to the marker location.</p></li>
+						<li><p>While the popup is open, click the 'Direction' button for driving directions from the point of origin to the marker location.</p></li>
+						<li><p>Click 'Clear' to delete all location markers on the map.</p></li>
 					</ul>
 				</div>
 			</header>
@@ -34,12 +35,12 @@
 			</div>
 			<div id="directions-panel"></div>
 			<div id="searchInterface">
-				<input id="deleteMarkers" type="button" value="Clear Markers">
-				<input class="inputs" id="address" type="textbox" value="San Francisco, CA">
-				<input class="inputs" id="lookup" type="button" value="Lookup">
-				<input class="inputs" id="event" type="textbox" value="restaurant">
+				<input class="roundBtn" id="deleteMarkers" type="button" value="Clear">
+				<input class="inputs" id="address" type="textbox" placeholder="San Francisco, CA">
+				<input class="inputs" id="locate" type="button" value="Locate">
+				<input class="inputs" id="event" type="textbox" placeholder="restaurant">
 				<input class="inputs" id="find" type="button" value="Find">
-				<input id="direction" type="button" value="Drive">				
+				<input class="roundBtn" id="direction" type="button" value="Directions">				
 			</div>
 		</div>
 	</body>
