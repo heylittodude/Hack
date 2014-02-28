@@ -48,15 +48,72 @@ table {
 }
 /*My CSS*/
 body {
-	width: 1000px;
+	background-color: #F0F0F2;
+}
+title {
+	width: 850px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	background-color: red;
+	font-family: "Brush Script MT", cursive;
+	font-size: 5em;
+}
+#wrapper {
+	text-align: center;
+	height: auto !important;
+	min-width: 850px;
+	height: 100%;
+}
+#instruction {
+	display: block;
+	width: 850px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 1em;
+	margin-bottom: 1em;
+	font-family: "Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
+}
+h1 {
+	font-size: 1.5em;
+	margin-bottom: 15px;
+}
+ul {
+	text-align: left;
+	list-style-type: disc;
+	list-style-position: inside;
+}
+#mainContent {
+	margin-left: auto;
+	margin-right: auto;
+	width: 810px;
+	border: 20px solid #B2B2B2;
+	border-radius: 20px;
 }
 #map {
 	width: 400px;
-	height: 450px;
+	height: 400px;
 	display: inline-block;
+}
+#streetView {
+	height: 400px;
+	width: 400px;
+	display: inline-block;
+	z-index: 0;
+}
+.no-close .ui-dialog-titlebar-close {
+	display: none; 
 }
 #directions-panel {
 	width: 400px;
-	height: 100px;
-	display: inline-block;
+	height: 500px;
+	display: none;
+	overflow: scroll;
+	z-index: 1000;	
 }
+#searchInterface {
+	position: relative; 
+	height: 100px;
+	margin-top: 2em;
+}
+

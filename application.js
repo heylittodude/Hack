@@ -4,6 +4,7 @@ $(document).ready(function() {
 	var center;
 	var service;
 	var markers = [];
+	var destination = "";
 	var directionsDisplay;
 	var directionsService = new google.maps.DirectionsService();
 	$("#destination").hide();
@@ -18,6 +19,7 @@ $(document).ready(function() {
 		map = new google.maps.Map(document.getElementById("map"), mapOptions);
 		directionsDisplay.setMap(map);
 		directionsDisplay.setPanel(document.getElementById('directions-panel'));
+		createStreetView(latlng);
 	}
 
 
@@ -30,7 +32,7 @@ $(document).ready(function() {
 				map.setCenter(center);
 				var marker = new google.maps.Marker({
 					map: map,
-					position: results[0].geometry.location
+					position: center
 				});
 				markers.push(marker);
 			} else {
@@ -45,7 +47,9 @@ $(document).ready(function() {
 			radius: '1000',
 			query: document.getElementById('event').value
 		};
-		infowindow = new google.maps.InfoWindow();
+		infowindow = new google.maps.InfoWindow({
+			maxWidth: 150
+		});
 		service = new google.maps.places.PlacesService(map);
 		service.textSearch(request, callback);
 	}
@@ -54,7 +58,7 @@ $(document).ready(function() {
 		if (status == google.maps.places.PlacesServiceStatus.OK) {
     		for (var i = 0; i < results.length; i++) {
       			var place = results[i];
-      			createMarker(results[i]);
+      			createMarker(place);
     		}
   		}
 	}
@@ -67,16 +71,29 @@ $(document).ready(function() {
   		});
   		markers.push(marker);
   		google.maps.event.addListener(marker, 'click', function() {
-    		infowindow.setContent(place.name);
-    		infowindow.open(map, this);
-    		$("#destination").attr("value", placeLoc);
+  			var content = "<span id='title'>" + place.name + "</span>" + "<br>" + 
+  				          "<p id='addr'>" + place.formatted_address + "</p>" + 
+  				          "<span id='rating_text'>Rating: </span>" + "<span id='rating_num'>" + place.rating +"</span>"
+    		infowindow.setContent(content);
+    		infowindow.open(map, marker);
+    		destination = placeLoc;
+    		createStreetView(placeLoc);
   		});
-  		$(".drive").click(calcRoute);
-
+  	}
+  	function createStreetView(placeLoc) {
+		var panoramaOptions = {
+    		position: placeLoc,
+    		pov: {
+      			heading: 34,
+      			pitch: 10
+    		}
+  		};
+  		var panorama = new google.maps.StreetViewPanorama(document.getElementById('streetView'), panoramaOptions);
+  		map.setStreetView(panorama);
 	}
 	function calcRoute() {
   		var start = document.getElementById('address').value;
-  		var end = document.getElementById('destination').value;
+  		var end = destination;
   		var request = {
     		origin: start,
     		destination: end,
@@ -99,5 +116,34 @@ $(document).ready(function() {
 		});
 		markers.length = 0;
 	});
-	$("#direction").click(calcRoute);
+	$("#direction").click(function() {
+		if (destination === "") {
+			alert("Pick a destination first!")
+		} else {    
+        	$("#directions-panel").dialog({
+        		dialogClass: "no-close",
+        		buttons: { 
+        			"Close": function() { $( this ).dialog( "close" ); } 
+        			},
+            	width: "400",
+            	height: "auto",
+           	 	position: {
+            		my: "right bottom",
+            		at: "right top",
+            		of: window
+            	},
+            	show: {
+                	effect: "slide",
+                	direction: "right",
+                	duration: 1000
+            	},
+            	hide: {
+                	effect: "slide",
+                	direction: "right",
+                	duration: 1000
+            	}
+        	});
+        	calcRoute();
+        }
+	});
 });
