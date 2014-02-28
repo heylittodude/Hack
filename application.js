@@ -7,7 +7,7 @@ $(document).ready(function() {
 	var destination = "";
 	var directionsDisplay;
 	var directionsService = new google.maps.DirectionsService();
-	$("#destination").hide();
+	//On page load, display google map and default streetview.
 	function initialize() {
 		directionsDisplay = new google.maps.DirectionsRenderer();
 		geocoder = new google.maps.Geocoder();
@@ -22,7 +22,7 @@ $(document).ready(function() {
 		createStreetView(latlng);
 	}
 
-
+	//Function used to take in search address and display it on the map.
 	function locateAddress() {
 		var address = document.getElementById('address').value;
 		geocoder.geocode( { 'address': address}, function(results, status) {
@@ -40,7 +40,7 @@ $(document).ready(function() {
 			}
 		});
 	}
-
+	//Function used to run a textsearch using google map API.
 	function eventSearch() {
 		var request = {
 			location: center,
@@ -53,15 +53,18 @@ $(document).ready(function() {
 		service = new google.maps.places.PlacesService(map);
 		service.textSearch(request, callback);
 	}
-
+	//Callback function for eventSearch function.
 	function callback(results, status) {
 		if (status == google.maps.places.PlacesServiceStatus.OK) {
     		for (var i = 0; i < results.length; i++) {
       			var place = results[i];
       			createMarker(place);
     		}
+  		} else {
+  			alert("Search Failed, reason: " + status);
   		}
 	}
+	//Function used to create markers for each event found.
 	function createMarker(place) {
   		var placeLoc = place.geometry.location;
   		
@@ -80,6 +83,7 @@ $(document).ready(function() {
     		createStreetView(placeLoc);
   		});
   	}
+  	//Function for creating and displaying streetView.
   	function createStreetView(placeLoc) {
 		var panoramaOptions = {
     		position: placeLoc,
@@ -91,6 +95,7 @@ $(document).ready(function() {
   		var panorama = new google.maps.StreetViewPanorama(document.getElementById('streetView'), panoramaOptions);
   		map.setStreetView(panorama);
 	}
+	//Function for requesting driving direction from google map API.
 	function calcRoute() {
   		var start = document.getElementById('address').value;
   		var end = destination;
@@ -107,15 +112,30 @@ $(document).ready(function() {
     		}
   		});
 	}
+	//Run initialize function when window is loaded.
 	google.maps.event.addDomListener(window, 'load', initialize);
-	$("#lookup").click(locateAddress);
+	//On button click or enter keypress, invoke locateAddress().
+	$("#locate").click(locateAddress);
+	$("#address").keydown(function(event) {
+		if (event.which === 13) {
+			locateAddress();
+		}
+	});
+	//On button click or enter keypress, invoke eventSearch().
 	$("#find").click(eventSearch);
+	$("#event").keydown(function(event) {
+		if (event.which === 13) {
+			eventSearch();
+		}
+	});
+	//Used to delete all markers currently on the map.
 	$("#deleteMarkers").click(function() {
 		$.each(markers, function(index) {
 			markers[index].setMap(null);
 		});
 		markers.length = 0;
 	});
+	//On button click creates a dialog with driving direction embedded.
 	$("#direction").click(function() {
 		if (destination === "") {
 			alert("Pick a destination first!")
