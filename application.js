@@ -106,6 +106,7 @@ $(document).ready(function() {
   		};
   		directionsService.route(request, function(response, status) {
     		if (status == google.maps.DirectionsStatus.OK) {
+    			directionsDisplay.setPanel(document.getElementById('directions-panel'));
     			directionsDisplay.setMap(map);
       			directionsDisplay.setDirections(response);
     		} else {
@@ -136,6 +137,7 @@ $(document).ready(function() {
 		});
 		markers.length = 0;
 		directionsDisplay.setMap();
+		directionsDisplay.setPanel();
 		$("#address").val("");
 		$("#event").val("");
 	});
