@@ -109,7 +109,7 @@ $(document).ready(function() {
     			directionsDisplay.setMap(map);
       			directionsDisplay.setDirections(response);
     		} else {
-    			alert("Error!")
+    			alert("Error! Reason: " + status);
     		}
   		});
 	}
