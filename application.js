@@ -106,6 +106,7 @@ $(document).ready(function() {
   		};
   		directionsService.route(request, function(response, status) {
     		if (status == google.maps.DirectionsStatus.OK) {
+    			directionsDisplay.setMap(map);
       			directionsDisplay.setDirections(response);
     		} else {
     			alert("Error!")
@@ -134,6 +135,9 @@ $(document).ready(function() {
 			markers[index].setMap(null);
 		});
 		markers.length = 0;
+		directionsDisplay.setMap();
+		$("#address").val("");
+		$("#event").val("");
 	});
 	//On button click creates a dialog with driving direction embedded.
 	$("#direction").click(function() {
